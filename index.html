@@ -3,8 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/calculatorvs2.css">
+   
     <title>Calculator</title>
+    
+<style>
+   *{
+    margin:0;
+    padding:0 ;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+ }
+
+ body{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e3f9ff;
+ }
+
+ .caculator{
+    border:1px solid #717377;
+    padding: 20px;
+    border-radius: 16px;
+    background: #3a4452;
+    box-shadow:0px 3px 15px rgba(86, 113, 167, 0.5);
+ }
+
+input{
+    width: 320px;
+    border:none;
+    padding: 24px;
+    margin: 10px;
+    background:transparent ;
+    box-shadow: 0px 3px 15px rgbs(84, 84, 84, 0.1);
+    font-size: 40px;
+    text-align: right;
+    cursor:pointer ;
+}
+
+input:placeholder-shown{
+    color: #ffffff;
+}
+
+button{
+    border: none;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border-radius: 50px;
+    background: white;
+    font-size: 20px;
+    box-shadow: -8px -8px 15px ;  
+    cursor: pointer;
+}
+
+.equelBtn{
+    background-color: #fb7c14;
+}
+
+
+</style>
+
+
+    
 </head>
 <body>
     <div class="caculator">
@@ -41,7 +104,41 @@
         </div>
 
     </div>
+
+    <script>
+      window.onload = function () {
+    let input = document.getElementById("inputBox");
+    let buttons = document.querySelectorAll("button");
+
+    let string = "";
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            let value = e.target.innerHTML;
+
+            if (value === "=") {
+                try {
+                    string = eval(string).toString();
+                    input.value = string;
+                } catch {
+                    input.value = "Error";
+                    string = "";
+                }
+            } else if (value === "AC") {
+                string = "";
+                input.value = "";
+            } else if (value === "DEL") {
+                string = string.slice(0, -1);
+                input.value = string;
+            } else {
+                string += value;
+                input.value = string;
+            }
+        });
+    });
+};
+    </script>
     
-    <script src="../js/calculatorvs2.js"></script>
+  
 </body>
 </html>
